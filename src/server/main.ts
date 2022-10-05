@@ -6,12 +6,13 @@ import {IpcRequest} from "../api";
 
 const createWindow = () => {
 
-  // The Vite build of the client code uses URLs like "/assets/main.1234.js" and we need to
+  // The Vite build of the client code uses src URLs like "/assets/main.1234.js" and we need to
   // intercept those requests and serve the files from the dist folder.
   protocol.interceptFileProtocol("file", (request, callback) => {
-    const filePath = request.url.replace("file:///", "");
-    if (filePath.startsWith("assets")) {
-      const webAssetPath = path.join(__dirname, "..", filePath);
+    const parsedUrl = path.parse(request.url);
+
+    if (parsedUrl.dir.includes("assets")) {
+      const webAssetPath = path.join(__dirname, "..", "assets", parsedUrl.base);
       callback({path: webAssetPath})
     } else {
       callback({url: request.url});
