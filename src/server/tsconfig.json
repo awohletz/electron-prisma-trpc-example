@@ -1,0 +1,25 @@
+{
+  "include": [
+    "**/*",
+    "../api.d.ts"
+  ],
+  "exclude": [
+    "../../node_modules"
+  ],
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": [
+      "es2015",
+      "es2017",
+      "es2019",
+      "dom"
+    ],
+    "outDir": "../../dist/server",
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSources": false,
+    "sourceMap": false,
+    "removeComments": true
+  }
+}
