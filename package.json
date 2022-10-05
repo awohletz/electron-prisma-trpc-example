@@ -1,6 +1,6 @@
 {
   "name": "electron-prisma-trpc-example",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": "https://github.com/awohletz/electron-prisma-trpc-example-releases",
   "description": "An example repo showing how to use Electron with tRPC and Prisma",
   "main": "dist/server/main.js",
