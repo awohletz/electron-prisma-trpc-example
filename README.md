@@ -12,7 +12,11 @@ This is the next generation of https://github.com/awohletz/electron-prisma-templ
 1. Clone this repo. Then in the project root directory, do the following:
 2. Run `npm install`.
 4. Edit electron-builder.yml to fill in productName, appId, copyright, and publisherName.
-5. Follow the instructions in https://www.electron.build/code-signing to set up code signing certificates for your platform.
+5. Set up code signing
+   6. Follow the instructions in https://www.electron.build/code-signing to set up code signing certificates for your platform.
+   7. See my articles: 
+      8. Windows: https://dev.to/awohletz/how-i-code-signed-an-electron-app-on-windows-30k5 
+      9. Mac: https://dev.to/awohletz/how-i-sign-and-notarize-my-electron-app-on-macos-59bb
 5. Edit package.json to fill in your project details. Set the `repository` property to a Github repo where you will publish releases. When you run `npm run dist`, the app will be packaged and published to the Github repo.
    1. Create a Github repo for your app releases. See https://www.electron.build/configuration/publish#githuboptions
    2. Create an access token for your Github repo. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
@@ -24,6 +28,9 @@ APPLE_ID_PASSWORD=your apple password
 APPLE_TEAM_ID=your apple team ID
 # If you want to publish releases to Github
 GITHUB_TOKEN=your github access token
+# If you want to code sign on Windows
+CSC_LINK=yourWindowsCodeSigningCert.pfx
+CSC_KEY_PASSWORD=your password for the Windows code signing cert
 ```
 5. Now you can run `npm start` to start in dev mode and check out the example app. If you want to test building and publishing a release, see the below sections.
 
@@ -64,3 +71,10 @@ To create a universal build on Mac M1 and Mac Intel, the build and install scrip
 The `electron-builder.yml` file has configuration to sign and notarize the app for Mac, Windows, and Linux. You'll have to customize this file to enter your own publisher and app info.
 
 See https://github.com/awohletz/electron-prisma-trpc-example-releases for an example repo that holds the releases for this app. I publish releases to that repo using the `npm run publish` script.
+
+Here are the steps to publish a release on all platforms:
+1. Make sure you've set up code signing and have the appropriate env vars in `.env`, as mentioned above in Getting Started. 
+2. On your Windows computer, run `npm run publish`
+2. On your Mac computer, run `npm run publish`
+
+These commands will build for their respective platforms and upload the release files to your Github repo. They don't have to be done in the order listed above. 
