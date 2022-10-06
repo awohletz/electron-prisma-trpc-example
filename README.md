@@ -75,4 +75,4 @@ Here are the steps to publish a release on all platforms:
 2. On your Windows computer, run `npm run publish`
 2. On your Mac computer, run `npm run publish`
 
-These commands will build for their respective platforms and upload the release files to your Github repo. They don't have to be done in the order listed above. 
+These commands will build for their respective platforms and upload the release files to your Github repo.
