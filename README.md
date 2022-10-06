@@ -37,7 +37,10 @@ CSC_KEY_PASSWORD=your password for the Windows code signing cert
 ### `npm run build` 
 Builds the project code and places it in `dist`. There are two steps to building: 
   1. Use Vite to transpile the frontend TypeScript code in `src/client` and move it to `dist`. 
+  2. Generate the Prisma client in `src/generated`
   2. Use the TypeScript compiler (`tsc`) to 1. check types in `src/client` (Vite does not check types) and 2. build the backend TypeScript code in `src/server` and place the output in `dist/server`.
+  3. Run copy-files.js -- Copy the generated Prisma client from `src/generated` to `dist/generated`
+  4. Run install-engines-on-mac.js -- Make sure that node_modules/@prisma/engines has both darwin and darwin-arm64 binaries. These will get packed into the app if you run `npm run pack`.
 
 ### `npm start` 
 Build and start the app without packaging.
