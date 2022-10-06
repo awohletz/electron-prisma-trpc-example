@@ -132,3 +132,5 @@ dist
 packed
 
 .idea
+src/generated
+prisma/app.db

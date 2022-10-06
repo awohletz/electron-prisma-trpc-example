@@ -1,17 +1,13 @@
+import { PrismaClient } from '../generated/client';
 import {initTRPC} from '@trpc/server';
 
 const t = initTRPC.create();
-
-type User = { id: number; name: string };
-const users: User[] = [
-  {id: 1, name: 'John'},
-  {id: 2, name: 'Jane'},
-];
+const prisma = new PrismaClient();
 
 export const appRouter = t.router({
   users: t.procedure
-    .query((req) => {
-      return users;
+    .query(() => {
+      return prisma.user.findMany();
     }),
   userById: t.procedure
     .input((val: unknown) => {
@@ -21,17 +17,24 @@ export const appRouter = t.router({
       return val;
     })
     .query(({input: id}) => {
-      return users.find((user) => user.id === id);
+      return prisma.user.findUnique({
+        where: {
+          id,
+        }
+      })
     }),
   userCreate: t.procedure
     .input((val: unknown) => {
       if (typeof val === 'string') return val;
       throw new Error(`Invalid input: ${typeof val}`);
     })
-    .mutation((req) => {
-      const { input } = req;
-      const user = { id: users.length + 1, name: input };
-      users.push(user);
+    .mutation(async ({input: name}) => {
+      const user = await prisma.user.create({
+        data: {
+          name
+        }
+      });
+
       return user;
     })
 });

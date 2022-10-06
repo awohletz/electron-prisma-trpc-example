@@ -6,8 +6,6 @@ This repo demonstrates:
 
 electron-prisma-trpc-example intends to provide a clean proof-of-concept that you can pick-and-choose from and integrate into your own Electron app.
 
-Currently (10/5/22) only tRPC is implemented. I am working on integrating Prisma. 
-
 This is the next generation of https://github.com/awohletz/electron-prisma-template, trimmed down and updated for the latest Electron and other dependencies.
 
 ## Getting started
@@ -57,7 +55,12 @@ In `src/client/renderer.ts` I've provided a custom `fetch` implementation to tRP
 
 In `src/server/main.ts`, `ipcMain` listens for those IPC requests and fowards them to the tRPC server. To enable this, I built a `ipcRequestHandler` function, which is a customized version of [tRPC's fetchRequestHandler](https://trpc.io/docs/v10/fetch). Instead of sending fetch API Request and Response objects, which cannot be serialized over IPC, it sends plain JSON objects and converts them to Response objects in the Renderer code.
 
+## Prisma usage
+electron-prisma-trpc-example uses Prisma to manage the SQLite database. To enable this, I had to leave the Prisma binaries out of app.asar. They do not work when packed inside app.asar. To leave them out, I specified them as excluded files in electron-builder.yml and as extraResources. Then I pass the query engine and migration engine paths from extraResources into the Prisma client constructor and the Prisma migrate command.  
+
+To create a universal build on Mac M1 and Mac Intel, the build and install scripts pack both sets of Prisma binaries. 
+
 ## Signing, notarizing, and publishing
 The `electron-builder.yml` file has configuration to sign and notarize the app for Mac, Windows, and Linux. You'll have to customize this file to enter your own publisher and app info.
 
-See https://github.com/awohletz/electron-prisma-trpc-example for an example repo that holds the releases for this app. I publish releases to that repo using the `npm run publish` script.
+See https://github.com/awohletz/electron-prisma-trpc-example-releases for an example repo that holds the releases for this app. I publish releases to that repo using the `npm run publish` script.
