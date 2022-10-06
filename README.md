@@ -6,7 +6,7 @@ This repo demonstrates:
 
 electron-prisma-trpc-example intends to provide a clean proof-of-concept that you can pick-and-choose from and integrate into your own Electron app.
 
-This is the next generation of https://github.com/awohletz/electron-prisma-template, trimmed down and updated for the latest Electron and other dependencies.
+This is the next generation of https://github.com/awohletz/electron-prisma-template, simplified, trimmed down, and updated for the latest Electron and other dependencies.
 
 ## Getting started
 1. Clone this repo. Then in the project root directory, do the following:
