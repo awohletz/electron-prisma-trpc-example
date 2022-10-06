@@ -2,7 +2,7 @@
 This repo demonstrates:
 - Using tRPC over IPC to communicate between the main and renderer processes.
 - Using Prisma with an SQLite database.
-- Building, signing, notarizing, and publishing an Electron app with electron-builder.
+- End-to-end process of building, signing, notarizing, and publishing an Electron app with electron-builder on Mac and Windows.
 
 electron-prisma-trpc-example intends to provide a clean proof-of-concept that you can pick-and-choose from and integrate into your own Electron app.
 
