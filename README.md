@@ -20,6 +20,7 @@ This is the next generation of https://github.com/awohletz/electron-prisma-templ
    2. Create an access token for your Github repo. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 6. Create a `.env` file that looks like this:
 ```
+DATABASE_URL=file:./app.db
 # If you are signing and notarizing the app on Mac
 APPLE_ID=your apple id
 APPLE_ID_PASSWORD=your apple password
