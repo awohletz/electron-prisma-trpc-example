@@ -15,8 +15,8 @@ This is the next generation of https://github.com/awohletz/electron-prisma-templ
 5. Set up code signing
    6. Follow the instructions in https://www.electron.build/code-signing to set up code signing certificates for your platform.
    7. See my articles: 
-      8. Windows: https://dev.to/awohletz/how-i-code-signed-an-electron-app-on-windows-30k5 
-      9. Mac: https://dev.to/awohletz/how-i-sign-and-notarize-my-electron-app-on-macos-59bb
+     8. Windows: https://dev.to/awohletz/how-i-code-signed-an-electron-app-on-windows-30k5 
+     9. Mac: https://dev.to/awohletz/how-i-sign-and-notarize-my-electron-app-on-macos-59bb
 5. Edit package.json to fill in your project details. Set the `repository` property to a Github repo where you will publish releases. When you run `npm run dist`, the app will be packaged and published to the Github repo.
    1. Create a Github repo for your app releases. See https://www.electron.build/configuration/publish#githuboptions
    2. Create an access token for your Github repo. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
