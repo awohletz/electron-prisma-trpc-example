@@ -79,6 +79,11 @@ const createWindow = async () => {
     },
   });
 
+  win.loadFile(path.join(__dirname, '..', 'index.html'));
+  win.webContents.openDevTools()
+};
+
+app.whenReady().then(() => {
   ipcMain.handle('trpc', (event, req: IpcRequest) => {
     return ipcRequestHandler({
       endpoint: "/trpc",
@@ -90,11 +95,6 @@ const createWindow = async () => {
     });
   })
 
-  win.loadFile(path.join(__dirname, '..', 'index.html'));
-  win.webContents.openDevTools()
-};
-
-app.whenReady().then(() => {
   createWindow();
 
   app.on('activate', () => {
