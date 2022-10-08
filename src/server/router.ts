@@ -1,8 +1,7 @@
-import { PrismaClient } from '../generated/client';
 import {initTRPC} from '@trpc/server';
+import { prisma } from './prisma';
 
 const t = initTRPC.create();
-const prisma = new PrismaClient();
 
 export const appRouter = t.router({
   users: t.procedure

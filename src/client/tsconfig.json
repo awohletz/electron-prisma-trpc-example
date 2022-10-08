@@ -9,7 +9,8 @@
     "strict": true,
     "module": "ES6",
     "moduleResolution": "Node",
-    "noEmit": true
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "**/*",
@@ -18,5 +19,5 @@
   "exclude": [
     "../../node_modules",
     "../server"
-  ]
+  ],
 }

@@ -20,6 +20,7 @@
     "esModuleInterop": true,
     "inlineSources": false,
     "sourceMap": false,
-    "removeComments": true
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true
   }
 }
