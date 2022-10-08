@@ -1,4 +1,4 @@
-## Purpose
+# Purpose
 This repo demonstrates:
 - Using tRPC over IPC to communicate between the main and renderer processes.
 - Using Prisma with an SQLite database.
@@ -74,9 +74,22 @@ The `electron-builder.yml` file has configuration to sign and notarize the app f
 
 See https://github.com/awohletz/electron-prisma-trpc-example-releases for an example repo that holds the releases for this app. I publish releases to that repo using the `npm run publish` script.
 
-Here are the steps to publish a release on all platforms:
+Here are the steps to publish a release on Windows and Mac:
 1. Make sure you've set up code signing and have the appropriate env vars in `.env`, as mentioned above in Getting Started. 
 2. On your Windows computer, run `npm run publish`
 2. On your Mac computer, run `npm run publish`
 
 These commands will build for their respective platforms and upload the release files to your Github repo.
+
+## Debugging
+The key parts of the Prisma integration:
+- The Prisma binaries/libraries do not work if packed inside of app.asar. Thus they have to be outside of the asar in extraResources. `npm run pack` should move them to ElectronPrismaTrpcExample/Contents/Resources/node_modules/@prisma/engines.
+- The Prisma client has to be configured to look for the query engine at that extraResources location (ElectronPrismaTrpcExample/Contents/Resources/node_modules/@prisma/engines). This is done either by [environment variable](https://www.prisma.io/docs/concepts/components/prisma-engines#using-custom-engine-libraries-or-binaries) or by [passing in the path with an internal config prop on the Prisma client constructor](https://github.com/prisma/prisma/discussions/5200#discussioncomment-295575). electron-prisma-trpc-example uses both of these techniques: Env var for the Prisma migrate command (which runs in a separate process) and engine prop for the Prisma client used to do queries in the app. 
+
+If you encounter a problem with Prisma related to it not finding the binaries, you can debug where it locates the binaries like so on a Mac:
+1. Open a terminal
+2. Run `export DEBUG=prisma*` (see [docs](https://www.prisma.io/docs/concepts/components/prisma-client/debugging#setting-the-debug-environment-variable))
+3. `cd` to the directory where the app package is. E.g. your Applications directory.
+4. Run the app directly inside the .app package by entering on your terminal: `./ElectronPrismaTrpcExample.app/Contents/MacOS/ElectronPrismaTrpcExample`
+5. Now you should see a bunch of debug output written to your terminal as the app starts. Prisma will show where it is searching for the binaries. 
+
