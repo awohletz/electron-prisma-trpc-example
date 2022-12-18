@@ -14,23 +14,24 @@
   "author": "Ayron Wohletz",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.11.17",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^6.0.0",
-    "electron": "^21.0.1",
-    "electron-builder": "^23.3.3",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
     "electron-notarize": "^1.2.1",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.1.0",
     "replace-in-file": "^6.3.5",
-    "typescript": "^4.8.4",
-    "vite": "^3.1.4"
+    "typescript": "^4.9.4",
+    "vite": "^4.0.2"
   },
   "dependencies": {
-    "@prisma/client": "^4.4.0",
-    "@prisma/engines": "^4.4.0",
-    "@trpc/client": "^10.0.0-proxy-beta.13",
-    "@trpc/server": "^10.0.0-proxy-beta.13",
+    "@prisma/client": "^4.7.1",
+    "@prisma/engines": "^4.7.1",
+    "@trpc/client": "^10.5.0",
+    "@trpc/server": "^10.5.0",
     "electron-log": "^4.4.8",
-    "prisma": "^4.4.0"
+    "prisma": "^4.7.1"
   }
 }
