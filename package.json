@@ -6,7 +6,7 @@
   "main": "dist/server/main.js",
   "scripts": {
     "build": "vite build && prisma generate && tsc --build && node copy-files.js && node install-engines-on-mac.js",
-    "start": "npm run build && cross-env NODE_ENV=development electron .",
+    "start": "npm run build && concurrently 'vite' 'cross-env NODE_ENV=development electron .'",
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "publish": "npm run build && dotenv -- electron-builder -p always"
@@ -15,6 +15,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.11.17",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^3.0.0",
+    "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^6.0.0",
@@ -29,9 +33,15 @@
   "dependencies": {
     "@prisma/client": "^4.7.1",
     "@prisma/engines": "^4.7.1",
+    "@tanstack/react-query": "^4.20.4",
     "@trpc/client": "^10.5.0",
+    "@trpc/react-query": "^10.5.0",
     "@trpc/server": "^10.5.0",
     "electron-log": "^4.4.8",
-    "prisma": "^4.7.1"
+    "prisma": "^4.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "superjson": "^1.12.1",
+    "zod": "^3.20.2"
   }
 }

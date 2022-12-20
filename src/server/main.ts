@@ -4,9 +4,10 @@ import path from "path";
 import {ipcRequestHandler} from "./ipcRequestHandler";
 import {IpcRequest} from "../api";
 import fs from "fs";
-import {dbPath, dbUrl, latestMigration, Migration} from "./constants";
+import {dbPath, dbUrl, isDev, latestMigration, Migration} from "./constants";
 import log from "electron-log";
 import {prisma, runPrismaCommand} from "./prisma";
+import {MenuBuilder} from "./menu";
 
 const createWindow = async () => {
 
@@ -79,7 +80,15 @@ const createWindow = async () => {
     },
   });
 
-  win.loadFile(path.join(__dirname, '..', 'index.html'));
+  const menuBuilder = MenuBuilder(win, app.name);
+  menuBuilder.buildMenu();
+
+  if (isDev) {
+    // in dev mode, load the vite dev server
+    await win.loadURL("http://localhost:5173");
+  } else {
+    await win.loadFile(path.join(__dirname, '..', 'index.html'));
+  }
   win.webContents.openDevTools()
 };
 

@@ -1,3 +1,14 @@
+export interface AboutMenuAction {
+  action: "about";
+}
+
+export interface HelpMenuAction {
+  action: "help";
+}
+
+export type AppAction = AboutMenuAction
+  | HelpMenuAction;
+
 export type IpcRequest = {
   body: any;
   headers: any;
@@ -15,6 +26,7 @@ export interface IElectronAPI {
   node: () => string;
   chrome: () => string;
   electron: () => string;
+  receive: (channel: "app", func: (event: AppAction) => void) => void;
   trpc: (req: IpcRequest) => Promise<IpcResponse>;
 }
 

@@ -16,5 +16,8 @@
     "sourceMap": false,
     "removeComments": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "references": [{
+    "path": "../../tsconfig.node.json"
+  }]
 }
