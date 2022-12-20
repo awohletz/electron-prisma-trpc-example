@@ -8,6 +8,11 @@ electron-prisma-trpc-example intends to provide a clean proof-of-concept that yo
 
 This is the next generation of https://github.com/awohletz/electron-prisma-template, simplified, trimmed down, and updated for the latest Electron and other dependencies.
 
+## What about React?
+**See the `react` branch**.
+
+The `main` branch of this repo uses the vanilla tRPC client and no frontend framework. This is to keep it minimal for those wanting to pull the techniques into their own Electron setups. However, I've also created a React version on the branch `react`. Check it out -- it uses React, the React client for tRPC, and Vite for building and hot-module reloading. I included a stubbed application menu and communication pipe from Main to Renderer.
+
 ## Getting started
 1. Clone this repo. Then in the project root directory, do the following:
 2. Run `npm install`.
