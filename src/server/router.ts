@@ -1,7 +1,11 @@
 import {initTRPC} from '@trpc/server';
 import { prisma } from './prisma';
+import superjson from 'superjson';
+import {z} from "zod";
 
-const t = initTRPC.create();
+const t = initTRPC.create({
+  transformer: superjson
+});
 
 export const appRouter = t.router({
   users: t.procedure
@@ -23,11 +27,12 @@ export const appRouter = t.router({
       })
     }),
   userCreate: t.procedure
-    .input((val: unknown) => {
-      if (typeof val === 'string') return val;
-      throw new Error(`Invalid input: ${typeof val}`);
-    })
-    .mutation(async ({input: name}) => {
+    .input(z.object({
+      name: z.string(),
+      dateCreated: z.date(),
+    }))
+    .mutation(async ({input: {name, dateCreated}}) => {
+      console.log("Creating user on ", dateCreated.toLocaleString());
       const user = await prisma.user.create({
         data: {
           name

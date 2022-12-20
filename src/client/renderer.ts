@@ -1,9 +1,12 @@
-import {createTRPCProxyClient, httpBatchLink} from '@trpc/client';
+import {createTRPCProxyClient, httpBatchLink, loggerLink} from '@trpc/client';
 import type {AppRouter} from "../server/router";
 import {IpcRequest} from "../api";
+import superjson from 'superjson';
 
 const trpc = createTRPCProxyClient<AppRouter>({
+  transformer: superjson,
   links: [
+    loggerLink(),
     httpBatchLink({
       url: '/trpc',
 
@@ -16,9 +19,7 @@ const trpc = createTRPCProxyClient<AppRouter>({
           body: input instanceof Request ? input.body : init?.body!,
         };
 
-        console.log("Sending request to Main process", req);
         const resp = await window.appApi.trpc(req);
-        console.log("Got response from Main process", resp);
 
         return new Response(resp.body, {
           status: resp.status,
@@ -47,7 +48,10 @@ const loadUsers = async () => {
 loadUsers();
 
 const addUser = async () => {
-  const user = await trpc.userCreate.mutate('New User');
+  const user = await trpc.userCreate.mutate({
+    name: 'New User',
+    dateCreated: new Date()
+  });
   const resp = document.getElementById('resp');
   if (resp) {
     resp.innerText = JSON.stringify(user, null, 2);
