@@ -6,7 +6,7 @@
   "main": "dist/server/main.js",
   "scripts": {
     "build": "vite build && prisma generate && tsc --build && node copy-files.js && node install-engines-on-mac.js",
-    "start": "npm run build && concurrently 'vite' 'cross-env NODE_ENV=development electron .'",
+    "start": "npm run build && concurrently \"vite\" \"cross-env NODE_ENV=development electron .\"",
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "publish": "npm run build && dotenv -- electron-builder -p always"
